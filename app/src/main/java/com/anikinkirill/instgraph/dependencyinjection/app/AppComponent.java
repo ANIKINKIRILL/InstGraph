@@ -1,4 +1,4 @@
-package com.anikinkirill.instgraph.dependencyinjection;
+package com.anikinkirill.instgraph.dependencyinjection.app;
 
 import android.app.Application;
 
@@ -14,7 +14,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(
         modules = {
-                AndroidSupportInjectionModule.class
+                AndroidSupportInjectionModule.class,
+                ActivityBuildersModule.class
         }
 )
 public interface AppComponent extends AndroidInjector<BaseApplication> {
