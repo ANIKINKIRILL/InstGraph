@@ -1,6 +1,6 @@
 package com.anikinkirill.instgraph;
 
-import com.anikinkirill.instgraph.dependencyinjection.DaggerAppComponent;
+import com.anikinkirill.instgraph.dependencyinjection.app.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
