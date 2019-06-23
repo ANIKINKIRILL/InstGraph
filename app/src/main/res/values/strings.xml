@@ -4,7 +4,7 @@
     <string name="instagram">INSTAGRAM</string>
     <string name="about_app_and_security">About App and Security</string>
 
-    <string name="client_id">your_client_id</string>
+    <string name="client_id">a88f8db5624e4b1396f9d576c66653b6</string>
     <string name="redirect_url">https://instagram.com/</string>
     <string name="base_url">https://api.instagram.com/</string>
 
