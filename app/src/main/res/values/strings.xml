@@ -3,4 +3,9 @@
     <string name="log_in">Log in</string>
     <string name="instagram">INSTAGRAM</string>
     <string name="about_app_and_security">About App and Security</string>
+
+    <string name="client_id">your_client_id</string>
+    <string name="redirect_url">https://instagram.com/</string>
+    <string name="base_url">https://api.instagram.com/</string>
+
 </resources>
