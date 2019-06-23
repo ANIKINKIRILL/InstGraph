@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/instagramBrandTitle"
-        android:text="@string/instagram"
+        android:text="@string/app_name"
         android:layout_above="@id/loginButton"
         android:gravity="center"
         android:fontFamily="serif"

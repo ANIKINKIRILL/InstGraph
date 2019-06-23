@@ -52,7 +52,8 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                 break;
             }
             case R.id.app_info_and_security:{
-                // Show detail app information
+                AppInfoBottomSheetDialog dialog = new AppInfoBottomSheetDialog();
+                dialog.show(getSupportFragmentManager(), getString(R.string.show_dialog));
                 break;
             }
         }
