@@ -1,5 +1,6 @@
 package com.anikinkirill.instgraph.ui.auth;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -8,6 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.anikinkirill.instgraph.R;
+import com.anikinkirill.instgraph.viewmodel.ViewModelProviderFactory;
+
+import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -19,15 +23,23 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
 
     private static final String TAG = "AuthActivity";
 
+    // Injections
+    @Inject
+    ViewModelProviderFactory providerFactory;
+
     // Ui components
     private Button loginButton;
     private TextView aboutApp;
+
+    // Vars
+    private AuthViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         init();
+        initViewModel();
     }
 
     /**
@@ -40,6 +52,10 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
 
         loginButton.setOnClickListener(this);
         aboutApp.setOnClickListener(this);
+    }
+
+    private void initViewModel(){
+        viewModel = ViewModelProviders.of(this, providerFactory).get(AuthViewModel.class);
     }
 
     @Override
