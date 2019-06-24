@@ -1,20 +1,15 @@
 package com.anikinkirill.instgraph.ui.auth;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.LiveDataReactiveStreams;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
 import com.anikinkirill.instgraph.SessionManager;
-import com.anikinkirill.instgraph.models.Meta;
 import com.anikinkirill.instgraph.models.User;
 import com.anikinkirill.instgraph.network.auth.AuthApi;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,25 +33,21 @@ public class AuthViewModel extends ViewModel {
     }
 
     public void getAuthUserData(String access_token){
-        LiveData<User> source = LiveDataReactiveStreams.fromPublisher(authApi.getAuthUserData(access_token)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .onErrorReturn(new Function<Throwable, User>() {
-                    @Override
-                    public User apply(Throwable throwable) throws Exception {
-                        User errorUser = new User();
-                        errorUser.setMeta(new Meta(400));
-                        return errorUser;
-                    }
-                })
-                .map(new Function<User, User>() {
-                    @Override
-                    public User apply(User user) {
-                        return user;
-                    }
-                })
-        );
-        sessionManager.authenticateUser(source);
+        Log.d(TAG, "getAuthUserData: " + authApi.getAuthUserData(access_token).request().url().toString());
+        authApi.getAuthUserData(access_token).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Log.d(TAG, "onResponse: called");
+                MutableLiveData<User> source = new MutableLiveData<>();
+                source.setValue(response.body());
+                sessionManager.authenticateUser(source);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d(TAG, "onFailure: called " + t.getMessage());
+            }
+        });
     }
 
 }

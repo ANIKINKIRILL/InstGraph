@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import com.anikinkirill.instgraph.models.User;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * This class keeps track of authenticated user
@@ -15,17 +16,15 @@ import javax.inject.Inject;
  * The same like in the Firebase
  */
 
+@Singleton
 public class SessionManager {
 
-    private MediatorLiveData<User> cachedUser = new MediatorLiveData<>();
+    private static final String TAG = "SessionManager";
+
+    MediatorLiveData<User> cachedUser = new MediatorLiveData<>();
 
     @Inject
     public SessionManager(){}
-
-    /**
-     * Authenticate user in ServiceDesk
-     * @param source   AuthApi.authenticateUser(login, password)...
-     */
 
     public void authenticateUser(final LiveData<User> source){
         cachedUser.addSource(source, new Observer<User>() {
@@ -36,11 +35,6 @@ public class SessionManager {
             }
         });
     }
-
-    /**
-     * Get current authenticated user
-     * @return      current user
-     */
 
     public LiveData<User> getAuthUser(){
         return cachedUser;
