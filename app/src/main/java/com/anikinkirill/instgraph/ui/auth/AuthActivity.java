@@ -78,5 +78,6 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     @Override
     public void onTokenReceived(String auth_token) {
         Log.d(TAG, "onTokenReceived: " + auth_token);
+        viewModel.getAuthUserData(auth_token);
     }
 }

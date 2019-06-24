@@ -3,6 +3,7 @@ package com.anikinkirill.instgraph.network.auth;
 import com.anikinkirill.instgraph.models.User;
 
 import io.reactivex.Flowable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -20,6 +21,6 @@ public interface AuthApi {
      */
 
     @GET("v1/users/self/")
-    Flowable<User> getAuthUserData(@Query("access_token") String access_token);
+    Call<User> getAuthUserData(@Query("access_token") String access_token);
 
 }
