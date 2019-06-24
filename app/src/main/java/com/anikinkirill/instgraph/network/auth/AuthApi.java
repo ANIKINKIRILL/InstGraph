@@ -21,6 +21,6 @@ public interface AuthApi {
      */
 
     @GET("v1/users/self/")
-    Call<User> getAuthUserData(@Query("access_token") String access_token);
+    Flowable<User> getAuthUserData(@Query("access_token") String access_token);
 
 }
