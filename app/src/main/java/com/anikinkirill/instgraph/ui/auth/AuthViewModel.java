@@ -56,6 +56,7 @@ public class AuthViewModel extends ViewModel {
                     }
                 })
         );
+        sessionManager.authenticateUser(source);
     }
 
 }
